@@ -1,6 +1,6 @@
 FROM alpine:edge AS build
 RUN apk update && \
-    apk add alpine-sdk texlive gnuplot bash ghostscript cmake git zlib-dev zstd-dev
+    apk add alpine-sdk texlive texlive-dvi texmf-dist-latexextra gnuplot bash ghostscript gcc g++ cmake make git zlib-dev zstd-dev
 RUN git clone https://github.com/CODARcode/z-checker-installer zchecker
 WORKDIR /zchecker
 RUN bash ./z-checker-install.sh
@@ -23,7 +23,7 @@ RUN tar -xzvf usecases.tar.gz
 
 FROM alpine:edge
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing">>/etc/apk/repositories && \
-    apk add --no-cache texlive texlive-dvi texmf-dist-latexextra gnuplot bash ghostscript g++ openssh openmpi-dev musl-dev gcc hdf5-dev make git zlib zstd zip
+    apk add --no-cache texlive texlive-dvi texmf-dist-latexextra gnuplot bash ghostscript gcc g++ cmake make git zlib-dev zstd-dev openssh openmpi-dev musl-dev hdf5-dev zip
 RUN sed -i 's/PATH=/PATH=.:/g' /etc/profile
 COPY --from=build /zchecker/ /zchecker/
 COPY --from=build /SZ/ /SZ/
@@ -31,3 +31,6 @@ COPY --from=build /QCAT/ /QCAT/
 COPY --from=build /ZFP/ /ZFP/
 COPY --from=build /usecases/ /usecases/
 COPY --from=build /usr/local/bin /usr/local/bin
+WORKDIR /zchecker/Z-checker
+RUN make -j 4
+WORKDIR /
