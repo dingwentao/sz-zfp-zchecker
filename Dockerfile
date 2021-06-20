@@ -4,7 +4,6 @@ RUN apk update && \
 RUN git clone https://github.com/CODARcode/z-checker-installer zchecker
 WORKDIR /zchecker
 RUN bash ./z-checker-install.sh
-RUN ./manageCompressor -d SZauto -c manageCompressor-SZauto.cfg
 WORKDIR /
 RUN git clone https://github.com/szcompressor/SZ.git SZ
 WORKDIR /SZ
@@ -31,5 +30,3 @@ COPY --from=build /SZ/ /SZ/
 COPY --from=build /QCAT/ /QCAT/
 COPY --from=build /ZFP/ /ZFP/
 COPY --from=build /usecases/ /usecases/
-
-
