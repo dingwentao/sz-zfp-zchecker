@@ -1,4 +1,4 @@
-# Dockerfile for sz-zfp-zchecker 
+# Dockerfile for SZ, ZFP, and Z-checker
 
 The image can be found and downloaded at [https://hub.docker.com/r/dingwentao/sz-zfp-zchecker](https://hub.docker.com/r/dingwentao/sz-zfp-zchecker). 
 
