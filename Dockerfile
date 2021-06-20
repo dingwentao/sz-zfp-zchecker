@@ -7,11 +7,11 @@ RUN bash ./z-checker-install.sh
 WORKDIR /
 RUN git clone https://github.com/szcompressor/SZ.git SZ
 WORKDIR /SZ
-RUN ./configure; make -j 4
+RUN ./configure; make -j 4; make install
 WORKDIR /
 RUN git clone https://github.com/szcompressor/qcat QCAT
 WORKDIR /QCAT
-RUN ./configure; make -j 4
+RUN ./configure; make -j 4; make install
 WORKDIR /
 RUN wget https://github.com/LLNL/zfp/releases/download/0.5.5/zfp-0.5.5.tar.gz
 RUN tar -xzvf zfp-0.5.5.tar.gz; mv zfp-0.5.5 ZFP
@@ -30,3 +30,4 @@ COPY --from=build /SZ/ /SZ/
 COPY --from=build /QCAT/ /QCAT/
 COPY --from=build /ZFP/ /ZFP/
 COPY --from=build /usecases/ /usecases/
+COPY --from=build /usr/local/bin /usr/local/bin
