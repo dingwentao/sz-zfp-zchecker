@@ -1,6 +1,21 @@
 # Dockerfile for SZ, ZFP, and Z-checker
 
-The image can be found and downloaded at [https://hub.docker.com/r/dingwentao/sz-zfp-zchecker](https://hub.docker.com/r/dingwentao/sz-zfp-zchecker). 
+To build sz-zfp-zchecker image, you just need download the Dockerfile in this repository and run a simple command:
+```
+docker build - < Dockerfile
+```
+
+The image can be also found at [https://hub.docker.com/r/dingwentao/sz-zfp-zchecker](https://hub.docker.com/r/dingwentao/sz-zfp-zchecker) and downloaded by:
+```
+docker pull dingwentao/sz-zfp-zchecker
+```
+
+After that, you can check the built/downloaded image ID and launch it by:
+```
+docker images
+docker run -p 9091:9091 -it [image ID] sh -l
+```
+
 
 ## SZ: Error-bounded Scientific Data Lossy Compressor
 
