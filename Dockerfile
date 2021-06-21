@@ -32,5 +32,7 @@ COPY --from=build /ZFP/ /ZFP/
 COPY --from=build /usecases/ /usecases/
 COPY --from=build /usr/local/bin /usr/local/bin
 WORKDIR /zchecker/Z-checker
-RUN make -j 4
+RUN make -j 4; make install
+WORKDIR /zchecker/zc-patches
+RUN gcc -O3 -o manageCompressor manageCompressor.c -fPIC -I/zchecker/Z-checker/zc-install/include -L/zchecker/Z-checker/zc-install/lib -lzc -lm -Wl,-rpath /zchecker/Z-checker/zc-install/lib; mv manageCompressor ..
 WORKDIR /
